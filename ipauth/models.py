@@ -56,7 +56,7 @@ class IP(object):
     int = property(_get_int, _set_int)
 
     def _get_str(self):
-        if self.int:
+        if self.int!=None:
             return long_to_ip(self.int)
         return ''
 
@@ -101,6 +101,8 @@ class IPAddressFormField(BaseIPAddressField):
         return value
 
     def to_python(self, value):
+        if value==0:
+            return IP(0)
         if value in validators.EMPTY_VALUES:
             return None
 
